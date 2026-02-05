@@ -22,7 +22,7 @@
 
     <!-- Main Container -->
     <div class="container" id="mainContainer">
-
+        
         <!-- HOME SCREEN -->
         <section class="screen active" id="screenHome" data-screen="home">
             <div class="hero">
@@ -41,7 +41,7 @@
                 <h2>Knowledge Hub</h2>
                 <p class="hub-desc">Choose your path through ancient wisdom</p>
             </div>
-
+            
             <div class="knowledge-grid">
                 <div class="knowledge-card" data-chapter="story">
                     <div class="card-number">01</div>
@@ -113,6 +113,16 @@
                     </div>
                 </div>
 
+                <div class="knowledge-card card-game" data-chapter="games">
+                    <div class="card-number">🎯</div>
+                    <h3>Test Your Understanding</h3>
+                    <p>Interactive challenges based on the wisdom</p>
+                    <div class="card-footer">
+                        <span>3 games</span>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+
                 <div class="knowledge-card card-accent" data-chapter="ebook">
                     <div class="card-number">∞</div>
                     <h3>Complete eBook</h3>
@@ -128,27 +138,136 @@
         <!-- CONTENT VIEWER -->
         <section class="screen" id="screenContent" data-screen="content">
             <div class="reader-wrapper">
-                <div class="reader-card">
+                <div class="reader-card" id="readerCard">
                     <div class="reader-content" id="contentBody">
                         <!-- Dynamic content -->
                     </div>
                 </div>
-
-                <!-- Navigation Controls -->
-                <button class="nav-arrow nav-prev" id="btnPrevious" disabled aria-label="Previous">
+                
+                <!-- Desktop Navigation -->
+                <button class="nav-arrow nav-prev nav-desktop" id="btnPrevious" disabled aria-label="Previous">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
                 </button>
-
-                <button class="nav-arrow nav-next" id="btnNext" aria-label="Next">
+                
+                <button class="nav-arrow nav-next nav-desktop" id="btnNext" aria-label="Next">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
                 </button>
+                
+                <!-- Mobile Navigation -->
+                <div class="mobile-nav-container" id="mobileNav">
+                    <button class="btn-mobile-nav" id="btnMobilePrev" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <div class="progress-dots" id="progressDots"></div>
+                    
+                    <button class="btn-mobile-nav" id="btnMobileNext">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Desktop Progress Dots -->
+                <div class="progress-dots progress-dots-desktop" id="progressDotsDesktop"></div>
+            </div>
+        </section>
 
-                <!-- Progress Dots -->
-                <div class="progress-dots" id="progressDots"></div>
+        <!-- GAMES HUB -->
+        <section class="screen" id="screenGamesHub" data-screen="gameshub">
+            <div class="games-header">
+                <h2>Test Your Understanding</h2>
+                <p class="games-desc">Interactive challenges to deepen your knowledge</p>
+            </div>
+            
+            <div class="games-grid">
+                <div class="game-card" data-game="mcq">
+                    <div class="game-icon">📝</div>
+                    <h3>Multiple Choice</h3>
+                    <p>Test your knowledge with questions from the text</p>
+                    <div class="game-meta">10 questions</div>
+                </div>
+
+                <div class="game-card" data-game="dragdrop">
+                    <div class="game-icon">🎯</div>
+                    <h3>Match & Connect</h3>
+                    <p>Connect concepts with their meanings</p>
+                    <div class="game-meta">8 pairs</div>
+                </div>
+
+                <div class="game-card" data-game="sequence">
+                    <div class="game-icon">📖</div>
+                    <h3>Story Sequence</h3>
+                    <p>Arrange Satyakam's journey in correct order</p>
+                    <div class="game-meta">7 events</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MCQ GAME -->
+        <section class="screen" id="screenMCQ" data-screen="mcq">
+            <div class="game-container">
+                <div class="game-header">
+                    <div class="game-progress">
+                        <span id="mcqCurrent">1</span> / <span id="mcqTotal">10</span>
+                    </div>
+                    <div class="game-score">Score: <span id="mcqScore">0</span></div>
+                </div>
+                
+                <div class="game-card-large">
+                    <div class="question-text" id="mcqQuestion"></div>
+                    <div class="options-container" id="mcqOptions"></div>
+                </div>
+                
+                <div class="game-feedback" id="mcqFeedback"></div>
+                
+                <button class="btn-game-next" id="btnMCQNext" style="display: none;">Continue</button>
+            </div>
+        </section>
+
+        <!-- DRAG DROP GAME -->
+        <section class="screen" id="screenDragDrop" data-screen="dragdrop">
+            <div class="game-container">
+                <div class="game-header">
+                    <div class="game-title">Match the Concepts</div>
+                    <div class="game-score">Matched: <span id="ddScore">0</span> / <span id="ddTotal">8</span></div>
+                </div>
+                
+                <div class="dragdrop-container">
+                    <div class="dragdrop-column">
+                        <h4>Concepts</h4>
+                        <div id="ddConcepts" class="dd-items"></div>
+                    </div>
+                    
+                    <div class="dragdrop-column">
+                        <h4>Meanings</h4>
+                        <div id="ddMeanings" class="dd-targets"></div>
+                    </div>
+                </div>
+                
+                <div class="game-feedback" id="ddFeedback"></div>
+                <button class="btn-game-check" id="btnDDCheck">Check Answers</button>
+            </div>
+        </section>
+
+        <!-- SEQUENCE GAME -->
+        <section class="screen" id="screenSequence" data-screen="sequence">
+            <div class="game-container">
+                <div class="game-header">
+                    <div class="game-title">Arrange Satyakam's Journey</div>
+                    <div class="game-hint">Drag to reorder the events</div>
+                </div>
+                
+                <div class="sequence-container" id="seqContainer"></div>
+                
+                <div class="game-feedback" id="seqFeedback"></div>
+                <button class="btn-game-check" id="btnSeqCheck">Check Sequence</button>
             </div>
         </section>
 
