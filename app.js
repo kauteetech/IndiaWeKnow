@@ -1,23 +1,24 @@
 // ==========================================
-// THE INDIA WE NEVER KNEW - PREMIUM EDITION
-// Content Source: PDF Only (No External Content)
+// THE INDIA WE NEVER KNEW - WITH MOBILE NAVIGATION FIXED
+// All Content From PDF Only
 // ==========================================
 
-// Application State
 const state = {
     currentScreen: 'home',
     currentChapter: null,
     currentSlide: 0,
-    totalSlides: 0
+    totalSlides: 0,
+    currentGame: null,
+    mcqIndex: 0,
+    mcqScore: 0,
+    ddMatched: 0
 };
 
 // ==========================================
-// CONTENT DATABASE - EXTRACTED FROM PDF
-// All content below is directly from the PDF
+// CONTENT DATABASE - FROM PDF
 // ==========================================
 
 const content = {
-    // Chapter 1: Story of Satyakam (12 moments from PDF)
     story: [
         {
             title: "The Question of Lineage",
@@ -104,8 +105,7 @@ With this realization, he stepped forward into the world not merely as a knower 
 • A society that fails to honour and respect women forfeits its moral claim to progress and true growth`
         }
     ],
-
-    // Chapter 2: India We Never Knew (8 insights from PDF)
+    
     india: [
         {
             title: "The India We Never Knew",
@@ -156,8 +156,7 @@ The India we never knew offers not a blueprint, but a compass—one that points 
 In holding up this forgotten mirror, the past does not ask to be restored—it asks to be understood.`
         }
     ],
-
-    // Chapter 3: Women as Knowledge Bearers (6 voices from PDF)
+    
     women: [
         {
             title: "Women as Bearers of Knowledge",
@@ -196,8 +195,7 @@ This silencing was not rooted in the foundational texts themselves, but in later
 Revisiting figures like Jabali, Gargi, and Maitreyi allows modern India to reclaim a legacy that affirms women not only as beneficiaries of knowledge, but as its custodians and transmitters.`
         }
     ],
-
-    // Chapter 4: Education as Character (7 principles from PDF)
+    
     education: [
         {
             title: "Education as Character Formation",
@@ -242,8 +240,7 @@ This shift narrowed the purpose of learning and weakened its transformative pote
 Revisiting ancient educational philosophies does not imply rejecting modern progress, but rather reintegrating character, empathy, and accountability into learning frameworks. Education that ignores these dimensions risks producing competence without conscience.`
         }
     ],
-
-    // Chapter 5: Truth & Social Order (5 teachings from PDF)
+    
     truth: [
         {
             title: "Truth, Integrity, and Social Order",
@@ -274,8 +271,7 @@ The emphasis on truthful speech in rituals, education, and governance reflects a
 This decline is portrayed not as a failure of philosophy, but as a failure of practice. When satya is subordinated to power, social harmony gives way to control.`
         }
     ],
-
-    // Chapter 6: Forgotten Wisdom (6 reflections from PDF)
+    
     decline: [
         {
             title: "When Wisdom Was Forgotten",
@@ -314,8 +310,7 @@ This separation of knowledge from integrity weakened social trust. When learning
 This recovery begins with education that forms conscience, social systems that honor women, and development models that respect nature. It requires returning to the ethical core of tradition rather than its outer shell.`
         }
     ],
-
-    // Chapter 7: Reimagining Future (4 principles from PDF)
+    
     future: [
         {
             title: "Reimagining India's Future",
@@ -345,7 +340,142 @@ The forgotten past thus becomes a compass—not a destination, but a guide towar
 };
 
 // ==========================================
-// EBOOK CONTENT - FROM PDF
+// GAME CONTENT - ALL FROM PDF
+// ==========================================
+
+const gameData = {
+    mcq: [
+        {
+            question: "Who was Satyakam's teacher (Guru)?",
+            options: ["Rishi Yajnavalkya", "Rishi Gautam", "Rishi Vishwamitra", "Rishi Vasishtha"],
+            correct: 1,
+            explanation: "Rishi Gautam was Satyakam's teacher, who accepted him as a disciple based on his honesty."
+        },
+        {
+            question: "What did Jabali confess to her son about his lineage?",
+            options: [
+                "She knew his father's name but wouldn't reveal it",
+                "She didn't know who his father was",
+                "His father was a great scholar",
+                "His father had passed away"
+            ],
+            correct: 1,
+            explanation: "Jabali honestly told Satyakam that she had served many men and didn't know who his father was."
+        },
+        {
+            question: "Why did Rishi Gautam accept Satyakam as his disciple?",
+            options: [
+                "Because of his family lineage",
+                "Because of his wealth",
+                "Because of his unflinching truthfulness",
+                "Because of his age"
+            ],
+            correct: 2,
+            explanation: "Rishi Gautam recognized that Satyakam's honesty revealed his worthiness for sacred knowledge."
+        },
+        {
+            question: "What was Satyakam's Guru Dakshina (sacred task)?",
+            options: [
+                "To meditate for 10 years",
+                "To turn 40 weak cows into 100 within 3 years",
+                "To teach other students",
+                "To write sacred texts"
+            ],
+            correct: 1,
+            explanation: "Sage Gautam asked Satyakam to turn 40 frail cows into 100 within three years without acquiring new cows."
+        },
+        {
+            question: "According to the PDF, what does 'Satya' mean in ancient Indian philosophy?",
+            options: [
+                "Material wealth",
+                "Alignment between thought, speech, and action",
+                "Religious rituals",
+                "Social status"
+            ],
+            correct: 1,
+            explanation: "Satya denotes alignment between thought, speech, and action—more than just factual accuracy."
+        },
+        {
+            question: "Which women are mentioned in the PDF as bearers of wisdom in ancient India?",
+            options: [
+                "Sita, Draupadi, and Kunti",
+                "Jabali, Gargi, and Maitreyi",
+                "Radha, Rukmini, and Satyabhama",
+                "Ahalya, Tara, and Mandodari"
+            ],
+            correct: 1,
+            explanation: "The PDF specifically mentions Jabali, Gargi Vachaknavi, and Maitreyi as examples of women who were central to wisdom transmission."
+        },
+        {
+            question: "According to the PDF, what was the Guru-Shishya Parampara?",
+            options: [
+                "A payment system for education",
+                "A tradition of humble approach, disciplined learning, and service",
+                "A caste-based hierarchy",
+                "A religious ceremony"
+            ],
+            correct: 1,
+            explanation: "The PDF describes it as a tradition where a seeker approached a Guru humbly, surrendering to disciplined learning through reverence and service."
+        },
+        {
+            question: "How did ancient Indian education view knowledge according to the PDF?",
+            options: [
+                "As accumulation of information",
+                "As entitlement based on birth",
+                "As responsibility and transformation",
+                "As preparation for wealth"
+            ],
+            correct: 2,
+            explanation: "The PDF states that ancient India understood knowledge 'not as entitlement, but as responsibility; not as accumulation, but as transformation.'"
+        },
+        {
+            question: "What happened when Satyakam took the weak cows to the forest?",
+            options: [
+                "They all died due to weakness",
+                "He bought more cows from villagers",
+                "Through meditation and care, they multiplied naturally to 100",
+                "He exchanged them for stronger cows"
+            ],
+            correct: 2,
+            explanation: "Through Satyakam's meditation, Vedic recitation, and care, the forest responded—the land grew fertile and the cows multiplied naturally to 100."
+        },
+        {
+            question: "According to the PDF, what role did nature play in ancient Indian philosophy?",
+            options: [
+                "A resource to be exploited",
+                "A living presence and participant",
+                "An obstacle to overcome",
+                "A place of punishment"
+            ],
+            correct: 1,
+            explanation: "The PDF states that ancient Indian philosophy 'consistently presents nature as a living presence rather than a passive backdrop.'"
+        }
+    ],
+    
+    dragdrop: [
+        { concept: "Satya", meaning: "Truth - alignment of thought, speech, and action" },
+        { concept: "Dharma", meaning: "Right living aligned with truth and social harmony" },
+        { concept: "Guru Dakshina", meaning: "Sacred repayment of knowledge received" },
+        { concept: "Gotra", meaning: "Parental lineage in ancient Indian society" },
+        { concept: "Jabali", meaning: "Satyakam's mother who chose truth over convenience" },
+        { concept: "Gargi & Maitreyi", meaning: "Women philosophers in Brihadaranyaka Upanishad" },
+        { concept: "Varna", meaning: "Originally qualities and responsibilities, not birth" },
+        { concept: "Chandogya Upanishad", meaning: "Ancient text containing Satyakam's story" }
+    ],
+    
+    sequence: [
+        { id: 1, text: "Satyakam desires to study the Vedas", order: 1 },
+        { id: 2, text: "Rishi Gautam questions him about his lineage", order: 2 },
+        { id: 3, text: "Jabali honestly reveals she doesn't know his father", order: 3 },
+        { id: 4, text: "Satyakam tells the truth to Rishi Gautam", order: 4 },
+        { id: 5, text: "Rishi Gautam accepts him based on his honesty", order: 5 },
+        { id: 6, text: "Satyakam receives the task of 40 weak cows", order: 6 },
+        { id: 7, text: "He meditates in the forest and the herd grows to 100", order: 7 }
+    ]
+};
+
+// ==========================================
+// EBOOK CONTENT
 // ==========================================
 
 const ebookContent = {
@@ -358,7 +488,7 @@ const ebookContent = {
     <p>The chapters that follow examine how these values shaped early Indian thought, how they gradually eroded, and why they remain profoundly relevant today. In doing so, the book invites readers to look beyond rigid narratives—both glorifying and dismissive—and engage instead with the deeper philosophical imagination of the civilization.</p>
     <p><em>The India We Never Knew</em> is ultimately a book about remembrance—not of rituals or hierarchies, but of first principles. It asks whether progress can endure without integrity, whether societies can grow while neglecting women and nature, and whether knowledge divorced from character can truly liberate.</p>
     <p>If this book encourages even a single moment of honest reflection about who we were, who we have become, and who we might yet be—then it has fulfilled its purpose.</p>`,
-
+    
     story: generateEbookChapter("The Truth of Satyakam – Chandogya Upanishad", content.story),
     india: generateEbookChapter("India We Never Knew", content.india),
     women: generateEbookChapter("Women as Bearers of Knowledge", content.women),
@@ -387,6 +517,10 @@ const screens = {
     home: document.getElementById('screenHome'),
     hub: document.getElementById('screenHub'),
     content: document.getElementById('screenContent'),
+    gamesHub: document.getElementById('screenGamesHub'),
+    mcq: document.getElementById('screenMCQ'),
+    dragdrop: document.getElementById('screenDragDrop'),
+    sequence: document.getElementById('screenSequence'),
     ebook: document.getElementById('screenEbook')
 };
 
@@ -395,8 +529,12 @@ const btnHome = document.getElementById('btnHome');
 const progressBar = document.getElementById('progressBar');
 const contentBody = document.getElementById('contentBody');
 const progressDots = document.getElementById('progressDots');
+const progressDotsDesktop = document.getElementById('progressDotsDesktop');
 const btnPrevious = document.getElementById('btnPrevious');
 const btnNext = document.getElementById('btnNext');
+const btnMobilePrev = document.getElementById('btnMobilePrev');
+const btnMobileNext = document.getElementById('btnMobileNext');
+const mobileNav = document.getElementById('mobileNav');
 const ebookText = document.getElementById('ebookText');
 const ebookChapters = document.getElementById('ebookChapters');
 
@@ -406,8 +544,43 @@ const ebookChapters = document.getElementById('ebookChapters');
 
 btnStart.addEventListener('click', () => navigateToScreen('hub'));
 btnHome.addEventListener('click', () => navigateToScreen('hub'));
+
+// Desktop navigation
 btnPrevious.addEventListener('click', () => navigateSlide(-1));
 btnNext.addEventListener('click', () => navigateSlide(1));
+
+// Mobile navigation
+btnMobilePrev.addEventListener('click', () => navigateSlide(-1));
+btnMobileNext.addEventListener('click', () => navigateSlide(1));
+
+// Touch swipe support for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.getElementById('readerCard')?.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+document.getElementById('readerCard')?.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    if (touchStartX - touchEndX > swipeThreshold) {
+        // Swipe left - next
+        if (!btnMobileNext.disabled) {
+            navigateSlide(1);
+        }
+    }
+    if (touchEndX - touchStartX > swipeThreshold) {
+        // Swipe right - previous
+        if (!btnMobilePrev.disabled) {
+            navigateSlide(-1);
+        }
+    }
+}
 
 // Chapter cards
 document.querySelectorAll('.knowledge-card').forEach(card => {
@@ -416,9 +589,19 @@ document.querySelectorAll('.knowledge-card').forEach(card => {
         if (chapter === 'ebook') {
             loadEbook('intro');
             navigateToScreen('ebook');
+        } else if (chapter === 'games') {
+            navigateToScreen('gamesHub');
         } else {
             loadChapter(chapter);
         }
+    });
+});
+
+// Game cards
+document.querySelectorAll('.game-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+        const game = e.currentTarget.dataset.game;
+        initGame(game);
     });
 });
 
@@ -452,10 +635,15 @@ function navigateToScreen(screenName) {
     Object.values(screens).forEach(s => s.classList.remove('active'));
     screens[screenName].classList.add('active');
     state.currentScreen = screenName;
-
+    
     btnHome.style.display = screenName === 'home' ? 'none' : 'block';
-
-    const progressMap = { home: 0, hub: 10, content: 50, ebook: 50 };
+    
+    // Show/hide mobile nav
+    if (mobileNav) {
+        mobileNav.style.display = screenName === 'content' ? 'flex' : 'none';
+    }
+    
+    const progressMap = { home: 0, hub: 10, content: 50, gamesHub: 30, mcq: 60, dragdrop: 60, sequence: 60, ebook: 50 };
     progressBar.style.width = (progressMap[screenName] || 0) + '%';
 }
 
@@ -463,51 +651,65 @@ function loadChapter(chapterKey) {
     state.currentChapter = chapterKey;
     state.currentSlide = 0;
     state.totalSlides = content[chapterKey].length;
-
-    // Generate progress dots
-    progressDots.innerHTML = '';
-    for (let i = 0; i < state.totalSlides; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'progress-dot';
-        if (i === 0) dot.classList.add('active');
-        progressDots.appendChild(dot);
-    }
-
+    
+    // Create progress dots for both desktop and mobile
+    [progressDots, progressDotsDesktop].forEach(container => {
+        if (container) {
+            container.innerHTML = '';
+            for (let i = 0; i < state.totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'progress-dot';
+                if (i === 0) dot.classList.add('active');
+                container.appendChild(dot);
+            }
+        }
+    });
+    
     renderSlide();
     navigateToScreen('content');
 }
 
 function renderSlide() {
     const slide = content[state.currentChapter][state.currentSlide];
-
+    
     contentBody.innerHTML = `
         <h2>${slide.title}</h2>
         <p>${slide.text}</p>
     `;
-
-    // Update dots
-    progressDots.querySelectorAll('.progress-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === state.currentSlide);
+    
+    // Update progress dots
+    [progressDots, progressDotsDesktop].forEach(container => {
+        if (container) {
+            container.querySelectorAll('.progress-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === state.currentSlide);
+            });
+        }
     });
-
-    // Update buttons
+    
+    // Update desktop buttons
     btnPrevious.disabled = state.currentSlide === 0;
-
-    // Progress bar
+    btnNext.disabled = false;
+    
+    // Update mobile buttons
+    if (btnMobilePrev && btnMobileNext) {
+        btnMobilePrev.disabled = state.currentSlide === 0;
+        btnMobileNext.disabled = false;
+    }
+    
     const progress = 10 + (state.currentSlide / state.totalSlides * 80);
     progressBar.style.width = progress + '%';
-
+    
     contentBody.scrollTop = 0;
 }
 
 function navigateSlide(direction) {
     const newSlide = state.currentSlide + direction;
-
+    
     if (newSlide >= state.totalSlides) {
         navigateToScreen('hub');
         return;
     }
-
+    
     if (newSlide >= 0 && newSlide < state.totalSlides) {
         state.currentSlide = newSlide;
         renderSlide();
@@ -517,16 +719,324 @@ function navigateSlide(direction) {
 function loadEbook(chapter) {
     ebookText.innerHTML = ebookContent[chapter];
     ebookText.scrollTop = 0;
-
+    
     ebookChapters.querySelectorAll('a').forEach(link => {
         link.classList.toggle('active', link.dataset.ebookChapter === chapter);
     });
 }
 
 // ==========================================
+// GAME FUNCTIONS
+// ==========================================
+
+function initGame(gameType) {
+    state.currentGame = gameType;
+    
+    if (gameType === 'mcq') {
+        initMCQ();
+    } else if (gameType === 'dragdrop') {
+        initDragDrop();
+    } else if (gameType === 'sequence') {
+        initSequence();
+    }
+}
+
+// MCQ Game
+function initMCQ() {
+    state.mcqIndex = 0;
+    state.mcqScore = 0;
+    
+    document.getElementById('mcqCurrent').textContent = '1';
+    document.getElementById('mcqTotal').textContent = gameData.mcq.length;
+    document.getElementById('mcqScore').textContent = '0';
+    
+    navigateToScreen('mcq');
+    loadMCQQuestion();
+    
+    const btnMCQNext = document.getElementById('btnMCQNext');
+    btnMCQNext.replaceWith(btnMCQNext.cloneNode(true));
+    document.getElementById('btnMCQNext').addEventListener('click', nextMCQQuestion);
+}
+
+function loadMCQQuestion() {
+    const q = gameData.mcq[state.mcqIndex];
+    const mcqQuestion = document.getElementById('mcqQuestion');
+    const mcqOptions = document.getElementById('mcqOptions');
+    const mcqFeedback = document.getElementById('mcqFeedback');
+    const btnMCQNext = document.getElementById('btnMCQNext');
+    
+    mcqQuestion.textContent = q.question;
+    mcqOptions.innerHTML = '';
+    mcqFeedback.classList.remove('show', 'success', 'error');
+    mcqFeedback.innerHTML = '';
+    btnMCQNext.style.display = 'none';
+    
+    q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.textContent = option;
+        div.addEventListener('click', () => checkMCQAnswer(index, q.correct, q.explanation));
+        mcqOptions.appendChild(div);
+    });
+    
+    document.getElementById('mcqCurrent').textContent = state.mcqIndex + 1;
+}
+
+function checkMCQAnswer(selected, correct, explanation) {
+    const options = document.querySelectorAll('.option');
+    const mcqFeedback = document.getElementById('mcqFeedback');
+    const btnMCQNext = document.getElementById('btnMCQNext');
+    
+    options.forEach(opt => opt.classList.add('disabled'));
+    
+    if (selected === correct) {
+        options[selected].classList.add('correct');
+        state.mcqScore++;
+        document.getElementById('mcqScore').textContent = state.mcqScore;
+        mcqFeedback.className = 'game-feedback show success';
+        mcqFeedback.innerHTML = `<strong>Correct!</strong> ${explanation}`;
+    } else {
+        options[selected].classList.add('incorrect');
+        options[correct].classList.add('correct');
+        mcqFeedback.className = 'game-feedback show error';
+        mcqFeedback.innerHTML = `<strong>Not quite.</strong> ${explanation}`;
+    }
+    
+    btnMCQNext.style.display = 'block';
+}
+
+function nextMCQQuestion() {
+    state.mcqIndex++;
+    
+    if (state.mcqIndex >= gameData.mcq.length) {
+        const percentage = Math.round((state.mcqScore / gameData.mcq.length) * 100);
+        const mcqFeedback = document.getElementById('mcqFeedback');
+        mcqFeedback.className = 'game-feedback show success';
+        mcqFeedback.innerHTML = `<h3>Quiz Complete!</h3><p>You scored ${state.mcqScore} out of ${gameData.mcq.length} (${percentage}%)</p>`;
+        document.getElementById('btnMCQNext').style.display = 'none';
+        document.querySelector('.game-card-large').style.display = 'none';
+    } else {
+        loadMCQQuestion();
+    }
+}
+
+// Drag Drop Game
+function initDragDrop() {
+    state.ddMatched = 0;
+    
+    const ddConcepts = document.getElementById('ddConcepts');
+    const ddMeanings = document.getElementById('ddMeanings');
+    const ddFeedback = document.getElementById('ddFeedback');
+    
+    ddConcepts.innerHTML = '';
+    ddMeanings.innerHTML = '';
+    ddFeedback.classList.remove('show');
+    
+    document.getElementById('ddScore').textContent = '0';
+    document.getElementById('ddTotal').textContent = gameData.dragdrop.length;
+    
+    const shuffledConcepts = [...gameData.dragdrop].sort(() => Math.random() - 0.5);
+    const shuffledMeanings = [...gameData.dragdrop].sort(() => Math.random() - 0.5);
+    
+    shuffledConcepts.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'dd-item';
+        div.textContent = item.concept;
+        div.draggable = true;
+        div.dataset.concept = item.concept;
+        div.addEventListener('dragstart', handleDragStart);
+        ddConcepts.appendChild(div);
+    });
+    
+    shuffledMeanings.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'dd-target';
+        div.dataset.meaning = item.meaning;
+        div.dataset.concept = item.concept;
+        div.textContent = item.meaning;
+        div.addEventListener('dragover', handleDragOver);
+        div.addEventListener('drop', handleDrop);
+        ddMeanings.appendChild(div);
+    });
+    
+    navigateToScreen('dragdrop');
+    
+    const btnDDCheck = document.getElementById('btnDDCheck');
+    btnDDCheck.replaceWith(btnDDCheck.cloneNode(true));
+    document.getElementById('btnDDCheck').addEventListener('click', checkDragDropAnswers);
+}
+
+let draggedElement = null;
+
+function handleDragStart(e) {
+    draggedElement = e.target;
+    e.target.classList.add('dragging');
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    
+    if (draggedElement && e.target.classList.contains('dd-target')) {
+        const clone = draggedElement.cloneNode(true);
+        clone.draggable = false;
+        e.target.innerHTML = '';
+        e.target.appendChild(clone);
+        e.target.classList.add('has-item');
+        draggedElement.style.opacity = '0.3';
+        draggedElement.draggable = false;
+    }
+    
+    if (draggedElement) {
+        draggedElement.classList.remove('dragging');
+    }
+}
+
+function checkDragDropAnswers() {
+    const targets = document.querySelectorAll('.dd-target');
+    let correct = 0;
+    
+    targets.forEach(target => {
+        const droppedItem = target.querySelector('.dd-item');
+        if (droppedItem) {
+            const droppedConcept = droppedItem.dataset.concept;
+            const targetConcept = target.dataset.concept;
+            
+            if (droppedConcept === targetConcept) {
+                target.classList.add('correct');
+                correct++;
+            } else {
+                target.classList.add('incorrect');
+            }
+        }
+    });
+    
+    document.getElementById('ddScore').textContent = correct;
+    
+    const ddFeedback = document.getElementById('ddFeedback');
+    const percentage = Math.round((correct / gameData.dragdrop.length) * 100);
+    
+    if (percentage === 100) {
+        ddFeedback.className = 'game-feedback show success';
+        ddFeedback.innerHTML = `<strong>Perfect!</strong> You matched all concepts correctly!`;
+    } else if (percentage >= 70) {
+        ddFeedback.className = 'game-feedback show success';
+        ddFeedback.innerHTML = `<strong>Great job!</strong> You matched ${correct} out of ${gameData.dragdrop.length} correctly (${percentage}%)`;
+    } else {
+        ddFeedback.className = 'game-feedback show';
+        ddFeedback.innerHTML = `<strong>Keep learning!</strong> You matched ${correct} out of ${gameData.dragdrop.length} (${percentage}%). Review the content and try again!`;
+    }
+}
+
+// Sequence Game
+function initSequence() {
+    const seqContainer = document.getElementById('seqContainer');
+    const seqFeedback = document.getElementById('seqFeedback');
+    
+    seqContainer.innerHTML = '';
+    seqFeedback.classList.remove('show');
+    
+    const shuffled = [...gameData.sequence].sort(() => Math.random() - 0.5);
+    
+    shuffled.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'seq-item';
+        div.draggable = true;
+        div.dataset.order = item.order;
+        div.innerHTML = `
+            <div class="seq-number">${index + 1}</div>
+            <div>${item.text}</div>
+        `;
+        div.addEventListener('dragstart', seqDragStart);
+        div.addEventListener('dragover', seqDragOver);
+        div.addEventListener('drop', seqDrop);
+        div.addEventListener('dragend', seqDragEnd);
+        seqContainer.appendChild(div);
+    });
+    
+    navigateToScreen('sequence');
+    
+    const btnSeqCheck = document.getElementById('btnSeqCheck');
+    btnSeqCheck.replaceWith(btnSeqCheck.cloneNode(true));
+    document.getElementById('btnSeqCheck').addEventListener('click', checkSequence);
+}
+
+let seqDraggedElement = null;
+
+function seqDragStart(e) {
+    seqDraggedElement = e.currentTarget;
+    e.currentTarget.classList.add('dragging');
+}
+
+function seqDragOver(e) {
+    e.preventDefault();
+}
+
+function seqDrop(e) {
+    e.preventDefault();
+    
+    if (seqDraggedElement && e.currentTarget !== seqDraggedElement) {
+        const container = e.currentTarget.parentNode;
+        const allItems = [...container.children];
+        const draggedIndex = allItems.indexOf(seqDraggedElement);
+        const targetIndex = allItems.indexOf(e.currentTarget);
+        
+        if (draggedIndex < targetIndex) {
+            e.currentTarget.after(seqDraggedElement);
+        } else {
+            e.currentTarget.before(seqDraggedElement);
+        }
+        
+        updateSeqNumbers();
+    }
+}
+
+function seqDragEnd(e) {
+    e.currentTarget.classList.remove('dragging');
+}
+
+function updateSeqNumbers() {
+    const items = document.querySelectorAll('.seq-item');
+    items.forEach((item, index) => {
+        item.querySelector('.seq-number').textContent = index + 1;
+    });
+}
+
+function checkSequence() {
+    const items = document.querySelectorAll('.seq-item');
+    let correct = 0;
+    
+    items.forEach((item, index) => {
+        const expectedOrder = parseInt(item.dataset.order);
+        const currentPosition = index + 1;
+        
+        if (expectedOrder === currentPosition) {
+            item.classList.add('correct');
+            correct++;
+        } else {
+            item.classList.add('incorrect');
+        }
+    });
+    
+    const seqFeedback = document.getElementById('seqFeedback');
+    const percentage = Math.round((correct / gameData.sequence.length) * 100);
+    
+    if (percentage === 100) {
+        seqFeedback.className = 'game-feedback show success';
+        seqFeedback.innerHTML = `<strong>Perfect sequence!</strong> You arranged all events correctly in Satyakam's journey.`;
+    } else {
+        seqFeedback.className = 'game-feedback show';
+        seqFeedback.innerHTML = `<strong>Almost there!</strong> You got ${correct} out of ${gameData.sequence.length} in the correct order. Review the story and try again!`;
+    }
+}
+
+// ==========================================
 // INITIALIZE
 // ==========================================
 
-console.log('✨ The India We Never Knew - Premium Edition Loaded');
+console.log('✨ The India We Never Knew - Premium Edition with Working Mobile Navigation');
 console.log('📖 All content sourced exclusively from PDF');
-console.log('⌨️  Keyboard: ← → arrows to navigate, ESC to return');
+console.log('🎯 Interactive games + Mobile swipe support');
