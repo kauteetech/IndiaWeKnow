@@ -1,17 +1,17 @@
 /* ==========================================
    THE INDIA WE NEVER KNEW - PREMIUM EDITION
-   Sleek | Elegant | Refined
+   WITH WORKING MOBILE NAVIGATION
    ========================================== */
 
 :root {
-    /* Premium Color Palette */
     --primary: #D4713A;
     --primary-dark: #B8551F;
     --secondary: #1F2937;
     --accent: #8B7355;
     --gold: #B8860B;
-
-    /* Neutrals */
+    --success: #059669;
+    --error: #DC2626;
+    
     --black: #0A0A0A;
     --gray-900: #1A1A1A;
     --gray-800: #2A2A2A;
@@ -21,24 +21,20 @@
     --gray-100: #F3F4F6;
     --white: #FFFFFF;
     --cream: #FAF8F5;
-
-    /* Typography */
+    
     --font-serif: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Inter', -apple-system, sans-serif;
-
-    /* Spacing */
+    
     --space-xs: 0.5rem;
     --space-sm: 1rem;
     --space-md: 1.5rem;
     --space-lg: 2rem;
     --space-xl: 3rem;
     --space-xxl: 5rem;
-
-    /* Transitions */
+    
     --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ========== RESET ========== */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -59,7 +55,6 @@ body {
     overflow-x: hidden;
 }
 
-/* ========== PROGRESS BAR ========== */
 .progress-bar {
     position: fixed;
     top: 0;
@@ -71,7 +66,6 @@ body {
     z-index: 1000;
 }
 
-/* ========== HOME BUTTON ========== */
 .btn-home {
     position: fixed;
     top: var(--space-lg);
@@ -106,13 +100,11 @@ body {
     transition: var(--transition);
 }
 
-/* ========== CONTAINER ========== */
 .container {
     min-height: 100vh;
     position: relative;
 }
 
-/* ========== SCREEN SYSTEM ========== */
 .screen {
     min-height: 100vh;
     display: none;
@@ -217,12 +209,6 @@ body {
     transform: translateY(-2px);
 }
 
-.btn-enter span,
-.btn-enter::after {
-    position: relative;
-    z-index: 1;
-}
-
 /* ========== KNOWLEDGE HUB ========== */
 #screenHub {
     padding: var(--space-xxl) var(--space-lg);
@@ -259,7 +245,6 @@ body {
     width: 100%;
 }
 
-/* ========== KNOWLEDGE CARDS (PREMIUM) ========== */
 .knowledge-card {
     background: var(--white);
     border: 1px solid var(--gray-200);
@@ -340,6 +325,23 @@ body {
     color: var(--primary);
 }
 
+.card-game {
+    background: var(--success);
+    border-color: var(--success);
+}
+
+.card-game .card-number,
+.card-game h3,
+.card-game p,
+.card-game .card-footer {
+    color: var(--white);
+}
+
+.card-game:hover {
+    background: #047857;
+    border-color: #047857;
+}
+
 .card-accent {
     background: var(--gray-900);
     border-color: var(--gray-900);
@@ -362,6 +364,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: var(--space-xl) var(--space-lg);
+    padding-bottom: 120px; /* Space for mobile nav */
 }
 
 .reader-wrapper {
@@ -374,13 +377,13 @@ body {
 .reader-card {
     background: var(--white);
     border: 1px solid var(--gray-200);
-    min-height: 600px;
+    min-height: 500px;
     padding: var(--space-xxl);
     box-shadow: 0 4px 16px rgba(0,0,0,0.04);
 }
 
 .reader-content {
-    max-height: 70vh;
+    max-height: 65vh;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--gray-200) transparent;
@@ -448,7 +451,7 @@ body {
     color: var(--primary);
 }
 
-/* ========== NAVIGATION ARROWS (SUBTLE) ========== */
+/* ========== DESKTOP NAVIGATION ARROWS ========== */
 .nav-arrow {
     position: absolute;
     top: 50%;
@@ -496,15 +499,66 @@ body {
     transition: var(--transition);
 }
 
+/* ========== MOBILE NAVIGATION ========== */
+.mobile-nav-container {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-top: 1px solid var(--gray-200);
+    padding: var(--space-md);
+    z-index: 50;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+}
+
+.btn-mobile-nav {
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.btn-mobile-nav:active {
+    transform: scale(0.95);
+}
+
+.btn-mobile-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.btn-mobile-nav svg {
+    stroke: var(--white);
+}
+
 /* ========== PROGRESS DOTS ========== */
 .progress-dots {
+    display: flex;
+    gap: var(--space-xs);
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    overflow-x: auto;
+    padding: 4px 0;
+}
+
+.progress-dots-desktop {
     position: absolute;
     bottom: -60px;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    gap: var(--space-xs);
-    justify-content: center;
 }
 
 .progress-dot {
@@ -513,12 +567,346 @@ body {
     background: var(--gray-200);
     border-radius: 50%;
     transition: var(--transition);
+    flex-shrink: 0;
 }
 
 .progress-dot.active {
     background: var(--primary);
     width: 32px;
     border-radius: 4px;
+}
+
+/* ========== GAMES HUB ========== */
+#screenGamesHub {
+    padding: var(--space-xxl) var(--space-lg);
+    flex-direction: column;
+    align-items: center;
+}
+
+.games-header {
+    text-align: center;
+    margin-bottom: var(--space-xxl);
+    max-width: 600px;
+}
+
+.games-header h2 {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: var(--space-sm);
+    letter-spacing: -0.02em;
+}
+
+.games-desc {
+    font-size: 1rem;
+    color: var(--gray-700);
+    font-weight: 300;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    max-width: 1000px;
+    width: 100%;
+}
+
+.game-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    padding: var(--space-xl);
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    border-color: var(--success);
+}
+
+.game-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-md);
+}
+
+.game-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: var(--space-sm);
+}
+
+.game-card p {
+    color: var(--gray-700);
+    font-size: 0.95rem;
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+}
+
+.game-meta {
+    font-size: 0.85rem;
+    color: var(--success);
+    font-weight: 500;
+}
+
+/* ========== GAME CONTAINERS ========== */
+.game-container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--space-xl);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+    padding: var(--space-md);
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+}
+
+.game-progress, .game-score, .game-title, .game-hint {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+.game-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--gray-900);
+}
+
+.game-hint {
+    font-size: 0.9rem;
+    color: var(--gray-400);
+    font-weight: 400;
+}
+
+.game-card-large {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    padding: var(--space-xxl);
+    margin-bottom: var(--space-lg);
+    min-height: 400px;
+}
+
+.question-text {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: var(--gray-900);
+    margin-bottom: var(--space-xl);
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.option {
+    padding: var(--space-md) var(--space-lg);
+    background: var(--cream);
+    border: 2px solid var(--gray-200);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.05rem;
+    color: var(--gray-800);
+}
+
+.option:hover {
+    border-color: var(--primary);
+    background: var(--white);
+}
+
+.option.selected {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: var(--white);
+}
+
+.option.correct {
+    border-color: var(--success);
+    background: var(--success);
+    color: var(--white);
+}
+
+.option.incorrect {
+    border-color: var(--error);
+    background: var(--error);
+    color: var(--white);
+}
+
+.option.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.game-feedback {
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-lg);
+    border-left: 4px solid var(--primary);
+    background: var(--cream);
+    display: none;
+}
+
+.game-feedback.show {
+    display: block;
+}
+
+.game-feedback.success {
+    border-left-color: var(--success);
+}
+
+.game-feedback.error {
+    border-left-color: var(--error);
+}
+
+.btn-game-next, .btn-game-check {
+    padding: var(--space-md) var(--space-xl);
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+}
+
+.btn-game-next:hover, .btn-game-check:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* ========== DRAG DROP GAME ========== */
+.dragdrop-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.dragdrop-column h4 {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    color: var(--gray-900);
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.dd-items, .dd-targets {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    min-height: 500px;
+}
+
+.dd-item, .dd-target {
+    padding: var(--space-md);
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    cursor: grab;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.dd-item:active {
+    cursor: grabbing;
+}
+
+.dd-item.dragging {
+    opacity: 0.5;
+}
+
+.dd-target {
+    cursor: default;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--cream);
+}
+
+.dd-target.has-item {
+    background: var(--white);
+}
+
+.dd-target.correct {
+    border-color: var(--success);
+    background: #ECFDF5;
+}
+
+.dd-target.incorrect {
+    border-color: var(--error);
+    background: #FEF2F2;
+}
+
+/* ========== SEQUENCE GAME ========== */
+.sequence-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.seq-item {
+    padding: var(--space-md) var(--space-lg);
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    cursor: grab;
+    transition: var(--transition);
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.seq-item:active {
+    cursor: grabbing;
+}
+
+.seq-item.dragging {
+    opacity: 0.5;
+}
+
+.seq-number {
+    width: 32px;
+    height: 32px;
+    background: var(--gray-200);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--gray-700);
+    flex-shrink: 0;
+}
+
+.seq-item.correct {
+    border-color: var(--success);
+}
+
+.seq-item.correct .seq-number {
+    background: var(--success);
+    color: var(--white);
+}
+
+.seq-item.incorrect {
+    border-color: var(--error);
 }
 
 /* ========== EBOOK READER ========== */
@@ -642,71 +1030,68 @@ body {
         --space-xl: 2rem;
         --space-xxl: 3rem;
     }
-
+    
     .btn-home {
         top: var(--space-md);
         left: var(--space-md);
         width: 44px;
         height: 44px;
     }
-
+    
     .hero-title {
         font-size: 2.5rem;
     }
-
-    .knowledge-grid {
+    
+    .knowledge-grid,
+    .games-grid {
         grid-template-columns: 1fr;
     }
-
-    .reader-card {
+    
+    .reader-card,
+    .game-card-large {
         border-left: none;
         border-right: none;
         padding: var(--space-lg);
     }
-
-    .nav-arrow {
-        display: none;
+    
+    /* Hide desktop navigation, show mobile */
+    .nav-desktop {
+        display: none !important;
     }
-
-    .reader-wrapper {
-        display: flex;
-        flex-direction: column;
+    
+    .mobile-nav-container {
+        display: flex !important;
     }
-
-    .progress-dots {
-        position: static;
-        transform: none;
-        margin-top: var(--space-lg);
+    
+    .progress-dots-desktop {
+        display: none !important;
     }
-
-    /* Mobile tap zones */
-    .reader-card {
-        position: relative;
+    
+    .dragdrop-container {
+        grid-template-columns: 1fr;
     }
-
+    
     .ebook-layout {
         flex-direction: column;
     }
-
+    
     .ebook-nav {
         width: 100%;
         border-right: none;
         border-bottom: 1px solid var(--gray-200);
         padding: var(--space-lg);
     }
-
+    
     .ebook-main {
         padding: var(--space-lg);
     }
-}
-
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .reader-card {
+    
+    .game-container {
         padding: var(--space-md);
+    }
+    
+    .reader-content {
+        max-height: 55vh;
     }
 }
 
@@ -722,18 +1107,22 @@ body {
     }
 }
 
-.knowledge-card {
+.knowledge-card,
+.game-card {
     animation: fadeInUp 0.5s ease backwards;
 }
 
-.knowledge-card:nth-child(1) { animation-delay: 0.05s; }
-.knowledge-card:nth-child(2) { animation-delay: 0.1s; }
-.knowledge-card:nth-child(3) { animation-delay: 0.15s; }
+.knowledge-card:nth-child(1),
+.game-card:nth-child(1) { animation-delay: 0.05s; }
+.knowledge-card:nth-child(2),
+.game-card:nth-child(2) { animation-delay: 0.1s; }
+.knowledge-card:nth-child(3),
+.game-card:nth-child(3) { animation-delay: 0.15s; }
 .knowledge-card:nth-child(4) { animation-delay: 0.2s; }
 .knowledge-card:nth-child(5) { animation-delay: 0.25s; }
 .knowledge-card:nth-child(6) { animation-delay: 0.3s; }
 .knowledge-card:nth-child(7) { animation-delay: 0.35s; }
 .knowledge-card:nth-child(8) { animation-delay: 0.4s; }
+.knowledge-card:nth-child(9) { animation-delay: 0.45s; }
 
-/* ========== UTILITY ========== */
 .hidden { display: none !important; }
